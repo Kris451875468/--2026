@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light">
+<title>Виктор & Кристина — Свадьба 27-28 августа 2027</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  :root {
+    --white: #ffffff;
+    --black: #1a1a1a;
+    --pink: #e91e63;
+    --pink-light: #fce4ec;
+    --pink-soft: #f8bbd0;
+    --red: #c62828;
+    --gray: #6b6b6b;
+    --gold: #ffd700;
+  }
+  
+  html { 
+    scroll-behavior: smooth;
+    color-scheme: light;
+    background: var(--white);
+  }
+  
+  body {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--black);
+    background: var(--white) !important;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    html, body {
+      background: var(--white) !important;
+      color: var(--black) !important;
+    }
+    input, textarea, select {
+      background: var(--white) !important;
+      color: var(--black) !important;
+    }
+  }
+  
+  h1, h2, h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+  }
+  
+  /* ===== PRELOADER ===== */
+  #preloader {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: linear-gradient(135deg, #fce4ec 0%, #ffffff 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    transition: opacity 0.6s ease, visibility 0.6s ease;
+  }
+  #preloader.hidden {
+    opacity: 0;
+    visibility: hidden;
+  }
+  .preloader-content { text-align: center; }
+  .rings {
+    position: relative;
+    width: 100px; height: 100px;
+    margin: 0 auto 20px;
+  }
+  .ring {
+    position: absolute;
+    width: 60px; height: 60px;
+    border: 3px solid var(--pink);
+    border-radius: 50%;
+    animation: ring-rotate 2s linear infinite;
+  }
+  .ring-1 {
+    top: 0; left: 0;
+    border-top-color: transparent;
+  }
+  .ring-2 {
+    bottom: 0; right: 0;
+    border-bottom-color: transparent;
+    animation-direction: reverse;
+  }
+  @keyframes ring-rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  .preloader-text {
+    font-family: 'Great Vibes', cursive;
+    font-size: 2.5rem;
+    color: var(--red);
+    margin-bottom: 10px;
+  }
+  .preloader-subtext {
+    font-size: 0.9rem;
+    color: var(--gray);
+    letter-spacing: 2px;
+  }
+  
+  /* ===== МУЗЫКА ===== */
+  .music-control {
+    position: fixed;
+    top: 20px; right: 20px;
+    width: 55px; height: 55px;
+    background: linear-gradient(135deg, var(--pink), var(--red));
+    border: none; border-radius: 50%;
+    cursor: pointer; z-index: 1000;
+    box-shadow: 0 10px 30px rgba(233, 30, 99, 0.4);
+    transition: all 0.3s;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; color: var(--white);
+  }
+  .music-control:hover { transform: scale(1.1); }
+  .music-control.playing { animation: pulse-music 2s infinite; }
+  @keyframes pulse-music {
+    0%, 100% { box-shadow: 0 10px 30px rgba(233, 30, 99, 0.4); }
+    50% { box-shadow: 0 10px 30px rgba(233, 30, 99, 0.6), 0 0 0 10px rgba(233, 30, 99, 0.2); }
+  }
+  
+  .music-modal {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 2000; backdrop-filter: blur(10px);
+  }
+  .music-modal.hidden { display: none; }
+  .music-modal-content {
+    background: var(--white);
+    padding: 50px 35px; border-radius: 25px;
+    text-align: center; max-width: 380px; margin: 20px;
+    box-shadow: 0 30px 70px rgba(233, 30, 99, 0.3);
+    border: 2px solid var(--pink-light);
+  }
+  .music-modal-icon { font-size: 3.5rem; margin-bottom: 20px; }
+  .music-modal h2 { color: var(--red); margin-bottom: 15px; font-size: 1.8rem; }
+  .music-modal p { color: var(--gray); margin-bottom: 30px; }
+  .track-selector { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+  .track-btn {
+    padding: 15px 20px;
+    background: var(--pink-light); color: var(--black);
+    border: 2px solid var(--pink-soft); border-radius: 10px;
+    cursor: pointer; transition: all 0.3s;
+    font-size: 1rem; font-weight: 500;
+  }
+  .track-btn:hover, .track-btn.active {
+    background: var(--pink); color: var(--white); border-color: var(--pink);
+  }
+  .music-modal-btn {
+    padding: 15px 40px;
+    background: linear-gradient(135deg, var(--pink), var(--red));
+    color: var(--white); border: none; border-radius: 50px;
+    font-size: 1.05rem; font-weight: 500; cursor: pointer;
+    transition: all 0.3s; box-shadow: 0 10px 30px rgba(233, 30, 99, 0.3);
+  }
+  .music-modal-btn:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(233, 30, 99, 0.4); }
+  
+  /* ===== ЛЕПЕСТКИ И БЛЕСТКИ ===== */
+  .petal {
+    position: fixed;
+    width: 20px; height: 20px;
+    background: radial-gradient(circle, var(--pink-soft), transparent);
+    border-radius: 50% 0 50% 0;
+    opacity: 0.4; pointer-events: none;
+    animation: fall 15s infinite linear; z-index: 1;
+  }
+  @keyframes fall {
+    0% { transform: translateY(-100vh) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.4; }
+    90% { opacity: 0.4; }
+    100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+  }
+  .sparkle {
+    position: fixed;
+    width: 8px; height: 8px;
+    background: var(--gold); border-radius: 50%;
+    pointer-events: none;
+    animation: sparkle 3s infinite ease-in-out; z-index: 1;
+    box-shadow: 0 0 10px var(--gold), 0 0 20px var(--gold);
+  }
+  @keyframes sparkle {
+    0%, 100% { opacity: 0; transform: scale(0); }
+    50% { opacity: 1; transform: scale(1); }
+  }
+  
+  /* ===== КОНФЕТТИ ===== */
+  @keyframes confetti-fall {
+    0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+  }
+  
+  /* ===== СЕКЦИИ ===== */
+  .screen {
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    padding: 80px 20px;
+    position: relative; overflow: hidden;
+    background: var(--white);
+  }
+  .screen-content {
+    max-width: 700px; width: 100%;
+    text-align: center; position: relative; z-index: 2;
+  }
+  .menu-screen { display: none; }
+  .menu-screen.active { display: flex; }
+  
+  /* ===== ТАЙМЕР ===== */
+  .countdown {
+    display: flex; justify-content: center; gap: 20px;
+    margin: 30px 0; flex-wrap: wrap;
+  }
+  .countdown-item {
+    background: var(--pink-light);
+    padding: 20px 25px; border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(233, 30, 99, 0.1);
+    min-width: 80px;
+  }
+  .countdown-number {
+    font-size: 2.5rem; font-weight: 700;
+    color: var(--red); display: block;
+  }
+  .countdown-label {
+    font-size: 0.9rem; color: var(--gray);
+    text-transform: uppercase;
+  }
+  
+  /* ===== КАРТА ===== */
+  .map-container {
+    margin: 30px 0; border-radius: 15px;
+    overflow: hidden; box-shadow: 0 10px 30px rgba(233, 30, 99, 0.2);
+  }
+  .map-container iframe { width: 100%; height: 300px; border: none; }
+  
+  /* ===== КНОПКА КАЛЕНДАРЯ ===== */
+  .calendar-btn {
+    display: inline-block;
+    padding: 15px 30px;
+    background: linear-gradient(135deg, var(--pink), var(--red));
+    color: var(--white); text-decoration: none;
+    border-radius: 50px; font-weight: 500;
+    margin: 20px 10px; transition: all 0.3s;
+    box-shadow: 0 10px 30px rgba(233, 30, 99, 0.3);
+  }
+  .calendar-btn:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(233, 30, 99, 0.4); }
+  
+  /* ===== ПОДАРКИ ===== */
+  .gifts-box {
+    background: var(--pink-light);
+    padding: 40px; border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(233, 30, 99, 0.1);
+    margin: 30px 0;
+  }
+  .gifts-box h3 { color: var(--red); font-size: 1.8rem; margin-bottom: 20px; }
+  .gifts-box p { color: var(--gray); font-size: 1.1rem; line-height: 1.8; }
+  
+  /* ===== РАЗДЕЛИТЕЛЬ ===== */
+  .divider { width: 100px; height: 30px; margin: 20px auto; display: flex; align-items: center; justify-content: center; }
+  .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: linear-gradient(to right, transparent, var(--pink), transparent); }
+  .divider-heart {
+    width: 20px; height: 20px; background: var(--pink);
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E") center/contain no-repeat;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E") center/contain no-repeat;
+    margin: 0 10px;
+  }
+  
+  /* ===== ФОТО БЕЗ РАМКИ ===== */
+  .photo-frame {
+    width: 280px; 
+    height: 380px;
+    margin: 0 auto 40px; 
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+  }
+  
+  .photo-frame img { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+    display: block;
+  }
+  
+  /* ===== ДВЕ ФОТОРЯДОМ ===== */
+  .photo-pair {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 40px 0;
+  }
+  
+  .photo-pair .photo-frame {
+    width: 280px;
+    height: 380px;
+    margin: 0;
+  }
+  
+  h1 { font-size: 2.5rem; color: var(--red); margin-bottom: 20px; line-height: 1.3; }
+  h2 { font-size: 2.2rem; color: var(--red); margin-bottom: 25px; }
+  .amp { font-size: 2.5rem; color: var(--pink); display: block; margin: 10px 0; font-style: italic; }
+  .subtitle { margin: 25px 0; color: var(--gray); font-family: 'Great Vibes', cursive; font-size: 2.2rem; }
+  
+  /* ===== БЛОКИ СОБЫТИЙ ===== */
+  .event-block {
+    margin-bottom: 25px; text-align: left;
+    padding: 25px; background: var(--pink-light);
+    border-radius: 15px; border-left: 4px solid var(--pink);
+    position: relative;
+  }
+  .event-block::before {
+    content: '♥'; position: absolute;
+    top: -10px; left: 20px;
+    width: 30px; height: 30px;
+    background: var(--pink); color: var(--white);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+  }
+  .event-block h3 { color: var(--red); font-size: 1.5rem; margin-bottom: 10px; }
+  .event-block p { color: var(--gray); font-size: 0.95rem; }
+  .highlight { color: var(--red); font-weight: 500; }
+  
+  /* ===== ДРЕСС-КОД ===== */
+  .dresscode {
+    margin: 25px 0; padding: 30px;
+    background: var(--white); border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(233, 30, 99, 0.1);
+    border: 2px solid var(--pink-light);
+  }
+  .dresscode h3 { color: var(--pink); margin-bottom: 15px; font-size: 1.4rem; }
+  .dresscode-row { display: flex; gap: 15px; justify-content: center; margin: 20px 0; flex-wrap: wrap; }
+  .dresscode-item {
+    padding: 12px 25px; background: var(--pink-light);
+    border-radius: 30px; font-size: 0.95rem;
+    border: 1px solid var(--pink-soft);
+  }
+  .warning {
+    margin-top: 25px; padding: 20px;
+    background: #fff5f7; border-radius: 12px;
+    border-left: 4px solid var(--red);
+    font-size: 0.95rem; color: var(--gray); font-style: italic;
+  }
+  
+  /* ===== ЗАДАНИЯ ===== */
+  .task {
+    margin: 30px 0; padding: 30px;
+    background: var(--white); border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(233, 30, 99, 0.1);
+    text-align: left; border: 2px solid var(--pink-light);
+  }
+  .task-number {
+    display: inline-block;
+    width: 40px; height: 40px;
+    background: linear-gradient(135deg, var(--pink), var(--red));
+    color: var(--white); border-radius: 50%;
+    text-align: center; line-height: 40px;
+    font-weight: 600; margin-right: 12px;
+    box-shadow: 0 5px 15px rgba(233, 30, 99, 0.3);
+  }
+  .task h3 { display: inline; color: var(--red); font-size: 1.4rem; }
+  .task p { margin-top: 15px; color: var(--gray); }
+  
+  /* ===== ФОРМА ===== */
+  .form-container {
+    background: var(--white); padding: 50px 35px;
+    border-radius: 25px; box-shadow: 0 25px 60px rgba(233, 30, 99, 0.15);
+    text-align: left; border: 2px solid var(--pink-light);
+  }
+  .form-container h2 { text-align: center; color: var(--red); margin-bottom: 10px; font-size: 2.2rem; }
+  .form-deadline { text-align: center; color: var(--pink); font-style: italic; margin-bottom: 30px; font-size: 1rem; font-weight: 500; }
+  .form-group { margin-bottom: 25px; }
+  .form-group > label { display: block; margin-bottom: 10px; font-weight: 500; color: var(--black); font-size: 1rem; }
+  .form-group input[type="text"],
+  .form-group input[type="date"] {
+    width: 100%; padding: 14px 18px;
+    border: 2px solid var(--pink-light); border-radius: 10px;
+    font-family: 'Montserrat', sans-serif; font-size: 0.95rem;
+    transition: all 0.3s; background: var(--white); color: var(--black);
+  }
+  .form-group input[type="text"]:focus,
+  .form-group input[type="date"]:focus { outline: none; border-color: var(--pink); box-shadow: 0 0 0 3px rgba(233, 30, 99, 0.1); }
+  .radio-group { display: flex; flex-direction: column; gap: 10px; }
+  .radio-group label {
+    display: flex; align-items: center; gap: 12px;
+    cursor: pointer; font-weight: 400; color: var(--gray);
+    padding: 8px 12px; border-radius: 8px; transition: background 0.3s;
+  }
+  .radio-group label:hover { background: var(--pink-light); }
+  .radio-group input { accent-color: var(--pink); width: 20px; height: 20px; cursor: pointer; }
+  .checkbox-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .checkbox-grid label {
+    display: flex; align-items: center; gap: 10px;
+    cursor: pointer; color: var(--gray);
+    padding: 8px 10px; border-radius: 8px; transition: background 0.3s; font-size: 0.9rem;
+  }
+  .checkbox-grid label:hover { background: var(--pink-light); }
+  .checkbox-grid input { accent-color: var(--pink); width: 18px; height: 18px; cursor: pointer; }
+  @media (max-width: 500px) { .checkbox-grid { grid-template-columns: 1fr; } }
+  .submit-btn {
+    width: 100%; padding: 18px;
+    background: linear-gradient(135deg, var(--pink), var(--red));
+    color: var(--white); border: none; border-radius: 50px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.1rem; font-weight: 500; letter-spacing: 1px;
+    cursor: pointer; margin-top: 25px;
+    transition: all 0.3s; box-shadow: 0 10px 30px rgba(233, 30, 99, 0.3);
+  }
+  .submit-btn:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(233, 30, 99, 0.4); }
+  
+  /* ===== АНИМАЦИЯ ПОЯВЛЕНИЯ ===== */
+  .fade-in { opacity: 0; transform: translateY(40px); transition: opacity 1.2s ease, transform 1.2s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+  
+  /* ===== ФИНАЛЬНЫЙ ЭКРАН ===== */
+  .screen-thanks {
+    background: var(--white);
+    display: none; min-height: 100vh;
+    align-items: center; justify-content: center;
+    padding: 60px 20px;
+  }
+  .screen-thanks.active { display: flex; }
+  .thanks-container {
+    background: var(--pink-light);
+    padding: 60px 40px; border-radius: 30px;
+    box-shadow: 0 30px 70px rgba(233, 30, 99, 0.2);
+    max-width: 600px; width: 100%;
+  }
+  .thanks-icon {
+    width: 100px; height: 100px;
+    margin: 0 auto 30px;
+    background: linear-gradient(135deg, var(--pink), var(--red));
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 3rem; color: var(--white);
+    box-shadow: 0 15px 40px rgba(233, 30, 99, 0.3);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+  .thanks-title { font-family: 'Great Vibes', cursive; font-size: 3.5rem; color: var(--red); margin-bottom: 20px; }
+  .thanks-text { font-size: 1.15rem; color: var(--gray); margin-bottom: 20px; line-height: 1.8; }
+  .thanks-highlight {
+    font-size: 1.2rem; color: var(--pink); font-weight: 500;
+    margin-top: 30px; padding: 20px;
+    background: var(--white); border-radius: 15px;
+  }
+  
+  /* ===== МЕНЮ ===== */
+  .menu-title { font-size: 2rem; color: var(--red); margin-bottom: 30px; }
+  .menu-buttons {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 20px; max-width: 600px; margin: 0 auto;
+  }
+  @media (max-width: 500px) { .menu-buttons { grid-template-columns: 1fr; } }
+  .menu-btn {
+    padding: 25px 20px; background: var(--white);
+    border: 2px solid var(--pink-light); border-radius: 15px;
+    cursor: pointer; transition: all 0.3s;
+    box-shadow: 0 10px 30px rgba(233, 30, 99, 0.1);
+    text-align: center;
+  }
+  .menu-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(233, 30, 99, 0.2);
+    border-color: var(--pink);
+  }
+  .menu-btn-icon { font-size: 2.5rem; margin-bottom: 10px; }
+  .menu-btn-text { font-size: 1.1rem; color: var(--black); font-weight: 500; }
+  .back-btn {
+    display: inline-block;
+    padding: 15px 30px; background: var(--white);
+    color: var(--pink); border: 2px solid var(--pink);
+    border-radius: 50px; font-size: 1rem; font-weight: 500;
+    cursor: pointer; transition: all 0.3s; margin-top: 30px;
+  }
+  .back-btn:hover { background: var(--pink); color: var(--white); }
+  
+  /* ===== ИСТОРИЯ ===== */
+  .story-text {
+    text-align: left; font-size: 1.1rem;
+    line-height: 1.8; color: var(--gray); margin: 20px 0;
+  }
+  .story-text strong {
+    color: var(--red); display: block;
+    margin-top: 20px; font-size: 1.2rem;
+  }
+  .story-text em { color: var(--pink); font-style: italic; }
+  
+  @media (max-width: 600px) {
+    h1 { font-size: 1.8rem; }
+    .screen { padding: 50px 15px; }
+    .countdown-item { padding: 15px 20px; min-width: 70px; }
+    .countdown-number { font-size: 2rem; }
+    .music-control { width: 50px; height: 50px; font-size: 1.2rem; }
+    .gifts-box { padding: 25px 20px; }
+    .photo-frame { width: 240px; height: 320px; }
+    .photo-pair .photo-frame { width: 240px; height: 320px; }
+    .photo-pair { gap: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- PRELOADER -->
+<div id="preloader">
+  <div class="preloader-content">
+    <div class="rings">
+      <div class="ring ring-1"></div>
+      <div class="ring ring-2"></div>
+    </div>
+    <div class="preloader-text">В & К</div>
+    <div class="preloader-subtext">Загружаем приглашение...</div>
+  </div>
+</div>
+
+<!-- ЛЕПЕСТКИ И БЛЕСТКИ -->
+<div class="petal" style="left: 5%; animation-delay: 0s;"></div>
+<div class="petal" style="left: 15%; animation-delay: 2s;"></div>
+<div class="petal" style="left: 25%; animation-delay: 4s;"></div>
+<div class="petal" style="left: 35%; animation-delay: 6s;"></div>
+<div class="petal" style="left: 45%; animation-delay: 8s;"></div>
+<div class="petal" style="left: 55%; animation-delay: 10s;"></div>
+<div class="petal" style="left: 65%; animation-delay: 12s;"></div>
+<div class="petal" style="left: 75%; animation-delay: 14s;"></div>
+<div class="petal" style="left: 85%; animation-delay: 1s;"></div>
+<div class="petal" style="left: 95%; animation-delay: 3s;"></div>
+<div class="sparkle" style="top: 10%; left: 10%; animation-delay: 0s;"></div>
+<div class="sparkle" style="top: 20%; left: 20%; animation-delay: 0.5s;"></div>
+<div class="sparkle" style="top: 30%; left: 30%; animation-delay: 1s;"></div>
+<div class="sparkle" style="top: 40%; left: 40%; animation-delay: 1.5s;"></div>
+<div class="sparkle" style="top: 50%; left: 50%; animation-delay: 2s;"></div>
+<div class="sparkle" style="top: 60%; left: 60%; animation-delay: 2.5s;"></div>
+<div class="sparkle" style="top: 70%; left: 70%; animation-delay: 3s;"></div>
+<div class="sparkle" style="top: 80%; left: 80%; animation-delay: 3.5s;"></div>
+
+<!-- МОДАЛЬНОЕ ОКНО МУЗЫКИ -->
+<div class="music-modal" id="musicModal">
+  <div class="music-modal-content">
+    <div class="music-modal-icon">🎵</div>
+    <h2>Добро пожаловать!</h2>
+    <p>Выбери настроение музыки для нашего приглашения</p>
+    <div class="track-selector">
+      <button class="track-btn active" onclick="selectTrack(1)"> 💞 Трогательная</button>
+      <button class="track-btn" onclick="selectTrack(2)">🎉 Весёлая</button>
+    </div>
+    <button class="music-modal-btn" onclick="startMusic()">Включить музыку ♥</button>
+  </div>
+</div>
+
+<!-- КНОПКА МУЗЫКИ -->
+<button class="music-control" id="musicControl" onclick="toggleMusic()" title="Вкл/выкл музыку">🎵</button>
+
+<!-- МУЗЫКА -->
+<audio id="bgMusic1" loop><source src="music1.mp3" type="audio/mpeg"></audio>
+<audio id="bgMusic2" loop><source src="music2.mp3" type="audio/mpeg"></audio>
+<audio id="clickSound" preload="auto"><source src="click.mp3" type="audio/mpeg"></audio>
+
+<!-- ОСНОВНОЙ КОНТЕНТ -->
+<div id="main-content">
+
+<!-- ЭКРАН 1: Приветствие -->
+<section class="screen">
+  <div class="screen-content fade-in">
+    <div class="photo-frame"><img src="photo11.jpg" alt="Фото 11"></div>
+    <h1 id="greetingText">Хотим пригласить тебя на нашу свадьбу!</h1>
+    <div class="divider"><div class="divider-heart"></div></div>
+  </div>
+</section>
+
+<!-- ЭКРАН 2: Меню -->
+<section class="screen">
+  <div class="screen-content fade-in">
+    <div class="photo-frame" style="width: 280px; height: 380px; margin-bottom: 30px;"><img src="photo13.jpg" alt="Фото 13"></div>
+    <h2 class="menu-title">Узнай всё о нашей свадьбе ✨</h2>
+    <div class="divider"><div class="divider-heart"></div></div>
+    <div class="menu-buttons">
+      <button class="menu-btn" onclick="showMenuScreen('story')">
+        <div class="menu-btn-icon">💕</div>
+        <div class="menu-btn-text">Наша история</div>
+      </button>
+      <button class="menu-btn" onclick="showMenuScreen('day1')">
+        <div class="menu-btn-icon">📅</div>
+        <div class="menu-btn-text">День первый</div>
+      </button>
+      <button class="menu-btn" onclick="showMenuScreen('day2')">
+        <div class="menu-btn-icon">🏡</div>
+        <div class="menu-btn-text">День второй</div>
+      </button>
+      <button class="menu-btn" onclick="showMenuScreen('tasks')">
+        <div class="menu-btn-icon">🎯</div>
+        <div class="menu-btn-text">Задания</div>
+      </button>
+      <button class="menu-btn" onclick="showMenuScreen('gifts')">
+        <div class="menu-btn-icon">🎁</div>
+        <div class="menu-btn-text">Подарки</div>
+      </button>
+      <button class="menu-btn" onclick="showMenuScreen('form')">
+        <div class="menu-btn-icon">📝</div>
+        <div class="menu-btn-text">Анкета</div>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ЭКРАН 3: Имена + Таймер -->
+<section class="screen">
+  <div class="screen-content fade-in">
+    <div class="photo-frame"><img src="photo12.jpg" alt="Фото 12"></div>
+    <h1>Виктор <span class="amp">&</span> Кристина</h1>
+    <p class="subtitle">Наша свадьба ближе, чем кажется</p>
+    
+    <div class="countdown" id="countdown">
+      <div class="countdown-item"><span class="countdown-number" id="days">0</span><span class="countdown-label">дней</span></div>
+      <div class="countdown-item"><span class="countdown-number" id="hours">0</span><span class="countdown-label">часов</span></div>
+      <div class="countdown-item"><span class="countdown-number" id="minutes">0</span><span class="countdown-label">минут</span></div>
+      <div class="countdown-item"><span class="countdown-number" id="seconds">0</span><span class="countdown-label">секунд</span></div>
+    </div>
+    
+    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Свадьба+Виктора+и+Кристины&dates=20270827T113000/20270828T230000&details=Роспись+в+ЗАГСе+и+празднование+в+коттедже&location=Волжский,+ул.+Чайковского,+17А" class="calendar-btn" target="_blank"> Добавить в Google Календарь</a>
+    
+    <div style="margin-top: 30px; color: var(--gray);">
+      <p>📅 27 августа 2027, пятница — официальная часть</p>
+      <p>📅 28 августа 2027, суббота — молодёжный день</p>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<!-- ЭКРАН: Наша история с фото между текстом -->
+<section class="screen menu-screen" id="screen-story">
+  <div class="screen-content fade-in">
+    <h2>💕 Наша история</h2>
+    <div class="divider"><div class="divider-heart"></div></div>
+    
+    <div class="story-text">
+      <strong>2019 год. Саратов.</strong>
+      Кристина переехала в новый город, где всё было незнакомо. Но именно там судьба свела её с Виктором. Они быстро подружились. Кристина с самого первого дня поняла, что этот парень ей очень нравится, но Виктор... Виктор был увлечён дружбой и совершенно не замечал того, что происходило у неё в сердце.
+    </div>
+    
+    <div class="photo-pair">
+      <div class="photo-frame"><img src="photo1.jpg" alt="Фото 1"></div>
+      <div class="photo-frame"><img src="photo2.jpg" alt="Фото 2"></div>
+    </div>
+    
+    <div class="story-text">
+      <strong>Тот самый подъезд.</strong>
+      Но искра всё равно проскочила. Однажды, в обычном подъезде, они поцеловались. Это был странный и запутанный момент: вроде бы просто друзья, но уже не совсем. Они оба испугались этой неопределённости. Никто не знал, что с этим делать, и в итоге они просто замолчали. Несколько месяцев тишины, когда каждый думал о другом, но не решался сделать первый шаг.
+    </div>
+    
+    <div class="photo-pair">
+      <div class="photo-frame"><img src="photo3.jpg" alt="Фото 3"></div>
+      <div class="photo-frame"><img src="photo4.jpg" alt="Фото 4"></div>
+    </div>
+    
+    <div class="story-text">
+      <strong>22 августа 2020 года.</strong>
+      Судьба дала им второй шанс на дне рождения общей подруги. Они встретились, начали болтать, смеяться, и в тот вечер поцеловались снова. Но на этот раз всё встало на свои места. Никаких сомнений, только чёткое понимание: они нужны друг другу. Именно с этого дня началась их настоящая история.
+    </div>
+    
+    <div class="photo-pair">
+      <div class="photo-frame"><img src="photo5.jpg" alt="Фото 5"></div>
+      <div class="photo-frame"><img src="photo6.jpg" alt="Фото 6"></div>
+    </div>
+    
+    <div class="story-text">
+      <strong>Годы вместе.</strong>
+      Отношения развивались: долгие прогулки, бесконечные разговоры и время, проведенное только вдвоём. Они стали по-настоящему близкими. Но в 2022 году Кристина переехала из Саратова в Волжский, а Виктор остался. Казалось бы, расстояние должно было всё изменить, но вышло наоборот. Не выдержав разлуки, он собрал вещи и переехал вслед за ней. Потому что настоящий дом — это не город на карте, а человек, который рядом.
+    </div>
+    
+    <div class="photo-pair">
+      <div class="photo-frame"><img src="photo7.jpg" alt="Фото 7"></div>
+      <div class="photo-frame"><img src="photo8.jpg" alt="Фото 8"></div>
+    </div>
+    
+    <div class="story-text">
+      <strong>29 июля 2026 года. Геленджик.</strong>
+      Море, тёплый летний ветер и знаменитая статуя невесты на фоне заката. Именно там Виктор задал тот самый вопрос, к которому шёл все эти годы. Кристина, конечно же, сказала «да».
+    </div>
+    
+    <div class="photo-pair">
+      <div class="photo-frame"><img src="photo9.jpg" alt="Фото 9"></div>
+      <div class="photo-frame"><img src="photo10.jpg" alt="Фото 10"></div>
+    </div>
+    
+    <div class="story-text">
+      <em>Теперь они стоят на пороге самого важного дня в своей жизни. Дня, когда их история получит официальное продолжение. И они очень хотят, чтобы ты был рядом в этот момент.</em>
+    </div>
+    
+    <button class="back-btn" onclick="hideMenuScreen()">← Вернуться назад</button>
+  </div>
+</section>
+
+<!-- ЭКРАН: День первый -->
+<section class="screen menu-screen" id="screen-day1">
+  <div class="screen-content fade-in">
+    <h2>📅 День первый · 27 августа</h2>
+    <div class="divider"><div class="divider-heart"></div></div>
+    
+    <div class="event-block">
+      <h3>11:30 — Роспись в ЗАГСе</h3>
+      <p>Мы будем ждать тебя, чтобы разделить этот волнительный момент. Но мы всё понимаем: работа, дела, нежелание суеты. Поэтому <span class="highlight">приходи по желанию</span> — мы совершенно не обидимся, если ты пропустишь эту часть.</p>
+    </div>
+    <div class="event-block">
+      <h3>После ЗАГСа — Общая фотосессия</h3>
+      <p>После росписи мы хотим сделать общие фотографии со всеми, кто пришёл — с вами, с родителями, со всеми-всеми.</p>
+    </div>
+    <div class="event-block">
+      <h3>После фотосессии</h3>
+      <p>А дальше мы с родителями уедем в ресторан, чтобы отметить этот день в узком семейном кругу. Вы же сможете отдохнуть и набраться сил перед завтрашним днём!</p>
+    </div>
+    
+    <div class="dresscode">
+      <h3>👔 Дресс-код для ЗАГСа</h3>
+      <p style="color: var(--gray); margin-bottom: 15px;">Официально-торжественный стиль. Мы хотим, чтобы этот день был красивым и праздничным.</p>
+      <div class="dresscode-row">
+        <span class="dresscode-item">👗 Девушкам: коктейльные или вечерние платья, элегантные костюмы</span>
+        <span class="dresscode-item">🤵 Парням: классические костюмы или пиджак с брюками</span>
+      </div>
+    </div>
+    
+    <h3 style="margin-top: 30px; color: var(--red);">📍 Как добраться</h3>
+    <p style="color: var(--gray); margin-bottom: 15px;">ул. Чайковского, 17А, Волжский, Волгоградская обл., 404130</p>
+    <div class="map-container">
+      <iframe src="https://yandex.ru/map-widget/v1/?text=Волжский, ул. Чайковского, 17А&z=17" allowfullscreen="true"></iframe>
+    </div>
+    
+    <button class="back-btn" onclick="hideMenuScreen()">← Вернуться назад</button>
+  </div>
+</section>
+
+<!-- ЭКРАН: День второй -->
+<section class="screen menu-screen" id="screen-day2">
+  <div class="screen-content fade-in">
+    <h2>🏡 День второй · 28 августа</h2>
+    <div class="divider"><div class="divider-heart"></div></div>
+    <p style="color: var(--gray); margin-bottom: 25px;">
+      Мы знаем, что в августе бывает жарко, поэтому второй день мы делаем максимально расслабленным, молодёжным и только для своих.
+    </p>
+    
+    <div class="dresscode">
+      <h3>🏡 Мы снимаем коттедж!</h3>
+      <p style="color: var(--gray);">Это будет наш общий дом на один день — с бассейном, мангалом, музыкой и всем, что нужно для идеального лета.</p>
+    </div>
+    
+    <div class="dresscode">
+      <h3>👗 Дресс-код для коттеджа</h3>
+      <p style="color: var(--gray); margin-bottom: 15px;">Лёгкий, летний, расслабленный. Главное — комфорт и хорошее настроение!</p>
+      <div class="dresscode-row">
+        <span class="dresscode-item">👗 Девушкам: воздушные платья, сарафаны, юбки, майки</span>
+        <span class="dresscode-item">👕 Парням: шорты и рубашки с коротким рукавом</span>
+      </div>
+      <div class="warning">
+        💡 <strong>Маленькая просьба по стилю:</strong> Мы очень хотим, чтобы на фотографиях все выглядели празднично, поэтому просим парней выбрать рубашки вместо футболок. Рубашка с коротким рукавом — идеальный компромисс между комфортом и красотой!
+      </div>
+    </div>
+    
+    <h3 style="margin-top: 30px; color: var(--red);">📍 Как добраться</h3>
+    <p style="color: var(--gray); margin-bottom: 15px;">Волгоградская обл., рп. Средняя Ахтуба, Орловская ул., 12</p>
+    <div class="map-container">
+      <iframe src="https://yandex.ru/map-widget/v1/?text=Средняя Ахтуба, Орловская ул., 12&z=17" allowfullscreen="true"></iframe>
+    </div>
+    
+    <button class="back-btn" onclick="hideMenuScreen()">← Вернуться назад</button>
+  </div>
+</section>
+
+<!-- ЭКРАН: Задания -->
+<section class="screen menu-screen" id="screen-tasks">
+  <div class="screen-content fade-in">
+    <h2>🎯 Задания для гостей</h2>
+    <div class="divider"><div class="divider-heart"></div></div>
+    
+    <div class="task">
+      <span class="task-number">1</span>
+      <h3>Цветок для Кристины</h3>
+      <p>Каждый гость должен принести <strong>один цветок</strong>, который у него ассоциируется с невестой. Мы соберём из них невероятный букет невесты!</p>
+    </div>
+    <div class="task">
+      <span class="task-number">2</span>
+      <h3>Вы — наши ведущие</h3>
+      <p>Никто не сможет сделать этот день таким весёлым и душевным, как вы. Поэтому мы решили доверить роль ведущих именно вам!</p>
+      <p>Каждый гость может придумать и провести свой конкурс: пошлый, алкогольный, интеллектуальный, безумный — любой. Главное, чтобы было весело!</p>
+      <p style="margin-top: 20px; padding: 15px; background: var(--pink-light); border-radius: 10px; font-size: 0.95rem; border-left: 3px solid var(--pink);">💡 <strong>Важно:</strong> Если хотите устроить сюрприз — держите интригу! Но если нужна помощь с реквизитом — мы с радостью поможем.</p>
+    </div>
+    
+    <button class="back-btn" onclick="hideMenuScreen()">← Вернуться назад</button>
+  </div>
+</section>
+
+<!-- ЭКРАН: Подарки -->
+<section class="screen menu-screen" id="screen-gifts">
+  <div class="screen-content fade-in">
+    <h2>🎁 О подарках</h2>
+    <div class="divider"><div class="divider-heart"></div></div>
+    
+    <div class="gifts-box">
+      <h3>Ваше присутствие — главный подарок!</h3>
+      <p>Самое важное для нас — чтобы в этот день рядом были близкие люди. Ваши улыбки, объятия и хорошее настроение — это бесценно.</p>
+      <p style="margin-top: 20px;">Если вы всё же захотите сделать нам подарок, мы будем рады любому проявлению внимания. Мы не привередливы и будем счастливы всему: будь то конверт, который поможет нам в осуществлении наших планов, или какой-то личный, душевный подарок — всё будет принято с огромной благодарностью и любовью.</p>
+      <p style="margin-top: 20px; font-style: italic; color: var(--pink);">💐 И, пожалуйста, не забудьте про цветок для Кристины!</p>
+    </div>
+    
+    <button class="back-btn" onclick="hideMenuScreen()">← Вернуться назад</button>
+  </div>
+</section>
+
+<!-- ЭКРАН: Анкета -->
+<section class="screen menu-screen" id="screen-form">
+  <div class="screen-content fade-in">
+    <div class="form-container">
+      <h2> Анкета гостя</h2>
+      <p class="form-deadline">Пожалуйста, заполни до 1 июня 2027</p>
+      
+      <form id="guest-form" action="https://formspree.io/f/xzedokpa" method="POST">
+        <div class="form-group"><label>1. Твоё имя и фамилия</label><input type="text" name="Имя" required></div>
+        <div class="form-group">
+          <label>2. Придёшь один/одна или с парой?</label>
+          <div class="radio-group">
+            <label><input type="radio" name="Пара" value="Один/одна" required> Один / одна</label>
+            <label><input type="radio" name="Пара" value="С парой"> С парой</label>
+          </div>
+          <input type="text" name="Имя_пары" placeholder="Если с парой — напиши имя" style="margin-top: 10px;">
+        </div>
+        <div class="form-group">
+          <label>3. Будешь ли на росписи в ЗАГСе 27 августа?</label>
+          <div class="radio-group">
+            <label><input type="radio" name="ЗАГС" value="Да" required> Да</label>
+            <label><input type="radio" name="ЗАГС" value="Нет"> Нет</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>4. Придёшь ли на второй день свадьбы 28 августа?</label>
+          <div class="radio-group">
+            <label><input type="radio" name="День2" value="Да" required> Да</label>
+            <label><input type="radio" name="День2" value="Нет"> Нет</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>5. Принесёшь ли ты цветок для Кристины?</label>
+          <div class="radio-group">
+            <label><input type="radio" name="Цветок" value="Да" required> Да</label>
+            <label><input type="radio" name="Цветок" value="Нет"> Нет</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>6. Сделаешь ли ты конкурс?</label>
+          <div class="radio-group">
+            <label><input type="radio" name="Конкурс" value="Да" required> Да</label>
+            <label><input type="radio" name="Конкурс" value="Нет"> Нет</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>7. Устраивает ли тебя дресс-код?</label>
+          <div class="radio-group">
+            <label><input type="radio" name="Дресскод" value="Да" required> Да, всё понятно</label>
+            <label><input type="radio" name="Дресскод" value="Вопрос"> Есть вопрос</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>8. Что бы ты хотел увидеть на столе? (можно несколько)</label>
+          <div class="checkbox-grid">
+            <label><input type="checkbox" name="Еда" value="Шашлык свинина"> 🍢 Шашлык свинина</label>
+            <label><input type="checkbox" name="Еда" value="Шашлык курица"> 🍗 Шашлык курица</label>
+            <label><input type="checkbox" name="Еда" value="Люля-кебаб"> 🥩 Люля-кебаб</label>
+            <label><input type="checkbox" name="Еда" value="Рыба гриль">  Рыба на гриле</label>
+            <label><input type="checkbox" name="Еда" value="Креветки"> 🍤 Креветки</label>
+            <label><input type="checkbox" name="Еда" value="Сырная тарелка"> 🧀 Сырная тарелка</label>
+            <label><input type="checkbox" name="Еда" value="Салат Цезарь"> 🥗 Салат Цезарь</label>
+            <label><input type="checkbox" name="Еда" value="Овощи свежие"> 🥒 Овощная тарелка</label>
+            <label><input type="checkbox" name="Еда" value="Картошка мангал"> 🥔 Картошка на мангале</label>
+            <label><input type="checkbox" name="Еда" value="Хачапури"> 🍞 Хачапури</label>
+            <label><input type="checkbox" name="Еда" value="Фрукты"> 🍉 Фрукты</label>
+            <label><input type="checkbox" name="Еда" value="Ягоды"> 🍓 Ягоды</label>
+          </div>
+          <input type="text" name="Еда_своё" placeholder="✏️ Своё пожелание по еде" style="margin-top: 10px;">
+        </div>
+        <div class="form-group">
+          <label>9. Что из алкоголя ты предпочитаешь? (можно несколько)</label>
+          <div class="checkbox-grid">
+            <label><input type="checkbox" name="Алкоголь" value="Водка"> 🥃 Водка</label>
+            <label><input type="checkbox" name="Алкоголь" value="Виски"> 🥃 Виски</label>
+            <label><input type="checkbox" name="Алкоголь" value="Коньяк">  Коньяк</label>
+            <label><input type="checkbox" name="Алкоголь" value="Ром/Джин/Текила"> 🍸 Ром / Джин / Текила</label>
+            <label><input type="checkbox" name="Алкоголь" value="Вино красное"> 🍷 Вино красное</label>
+            <label><input type="checkbox" name="Алкоголь" value="Вино белое"> 🥂 Вино белое</label>
+            <label><input type="checkbox" name="Алкоголь" value="Вино розовое">  Вино розовое</label>
+            <label><input type="checkbox" name="Алкоголь" value="Шампанское">  Шампанское</label>
+            <label><input type="checkbox" name="Алкоголь" value="Апероль Шприц">  Апероль Шприц</label>
+            <label><input type="checkbox" name="Алкоголь" value="Мохито">  Мохито</label>
+            <label><input type="checkbox" name="Алкоголь" value="Настойка/Наливка">  Настойка / Наливка</label>
+          </div>
+          <label style="margin-top: 10px; display: flex; align-items: center; gap: 10px; cursor: pointer; color: var(--gray);">
+            <input type="checkbox" name="Алкоголь" value="Не пью"> 🚫 Не пью алкоголь
+          </label>
+          <input type="text" name="Алкоголь_особое" placeholder="✏️ Особые предпочтения" style="margin-top: 10px;">
+        </div>
+        <div class="form-group">
+          <label>10. Ты из другого города?</label>
+          <div class="radio-group">
+            <label><input type="radio" name="Город" value="Местный" required> Нет, я местный</label>
+            <label><input type="radio" name="Город" value="Иногородний"> Да, я из другого города</label>
+          </div>
+        </div>
+        <div class="form-group" id="outOfTownBlock" style="display: none;">
+          <div style="padding: 25px; background: linear-gradient(135deg, var(--pink-light), var(--white)); border-radius: 15px; border-left: 4px solid var(--pink);">
+            <p style="color: var(--gray); margin-bottom: 20px; font-size: 1.05rem; line-height: 1.7;">
+              Мы так ценим, что ты приедешь к нам из другого города! ❤️<br><br>
+              Чтобы тебе было комфортно, мы ждём тебя в нашем коттедже на основные дни свадьбы (с 27 по 29 августа).<br><br>
+              Если ты планируешь быть дольше, мы с радостью подскажем, где лучше остановиться.
+            </p>
+            
+            <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-top: 20px;">
+              <div style="flex: 1; min-width: 200px;">
+                <label style="display: block; margin-bottom: 8px; font-weight: 500; color: var(--black); font-size: 0.95rem;">📅 Когда приедешь?</label>
+                <input type="date" name="Дата_приезда" style="width: 100%; padding: 12px 15px; border: 2px solid var(--pink-light); border-radius: 10px; font-family: 'Montserrat', sans-serif; font-size: 0.95rem; background: var(--white); color: var(--black);">
+              </div>
+              <div style="flex: 1; min-width: 200px;">
+                <label style="display: block; margin-bottom: 8px; font-weight: 500; color: var(--black); font-size: 0.95rem;"> Когда уедешь?</label>
+                <input type="date" name="Дата_отъезда" style="width: 100%; padding: 12px 15px; border: 2px solid var(--pink-light); border-radius: 10px; font-family: 'Montserrat', sans-serif; font-size: 0.95rem; background: var(--white); color: var(--black);">
+              </div>
+            </div>
+            
+            <input type="text" name="Комментарий_иногородний" placeholder="✏️ Если есть вопросы по размещению — напиши здесь" style="width: 100%; padding: 12px 15px; border: 2px solid var(--pink-light); border-radius: 10px; font-family: 'Montserrat', sans-serif; font-size: 0.95rem; background: var(--white); color: var(--black); margin-top: 15px;">
+          </div>
+        </div>
+        <button type="submit" class="submit-btn">Отправить и сохранить место ♥</button>
+      </form>
+    </div>
+    
+    <button class="back-btn" onclick="hideMenuScreen()">← Вернуться назад</button>
+  </div>
+</section>
+
+<!-- ФИНАЛЬНЫЙ ЭКРАН -->
+<section class="screen-thanks" id="thanksScreen">
+  <div class="thanks-container">
+    <div class="thanks-icon">💕</div>
+    <h2 class="thanks-title">Спасибо, что ты с нами!</h2>
+    <p class="thanks-text">Твоя анкета отправлена. Мы безумно рады, что ты будешь частью нашего самого важного дня!</p>
+    <p class="thanks-text">Готовься к двум незабываемым дням, продумай свой конкурс и выбери тот самый цветок для Кристины. Обещаем — будет жарко, весело и очень душевно!</p>
+    <div class="thanks-highlight">💐 Ждём тебя с нетерпением!</div>
+  </div>
+</section>
+
+<script>
+  // ===== PRELOADER =====
+  window.addEventListener('load', function() {
+    setTimeout(() => {
+      document.getElementById('preloader').classList.add('hidden');
+    }, 1500);
+  });
+  
+  // ===== ПЕРСОНАЛИЗАЦИЯ ИМЕНИ =====
+  const urlParams = new URLSearchParams(window.location.search);
+  const guestName = urlParams.get('name');
+  if (guestName) {
+    document.getElementById('greetingText').innerHTML = `${guestName}, хотим пригласить тебя на нашу свадьбу!`;
+  }
+  
+  // ===== ТАЙМЕР =====
+  const weddingDate = new Date('2027-08-27T11:30:00').getTime();
+  function updateCountdown() {
+    const now = new Date().getTime();
+    const distance = weddingDate - now;
+    document.getElementById('days').innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
+    document.getElementById('hours').innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    document.getElementById('minutes').innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    document.getElementById('seconds').innerText = Math.floor((distance % (1000 * 60)) / 1000);
+  }
+  setInterval(updateCountdown, 1000);
+  updateCountdown();
+  
+  // ===== МУЗЫКА =====
+  const music1 = document.getElementById('bgMusic1');
+  const music2 = document.getElementById('bgMusic2');
+  const musicControl = document.getElementById('musicControl');
+  const musicModal = document.getElementById('musicModal');
+  let currentTrack = 1;
+  function selectTrack(track) {
+    currentTrack = track;
+    document.querySelectorAll('.track-btn').forEach((btn, index) => btn.classList.toggle('active', index === track - 1));
+  }
+  function startMusic() {
+    stopAllMusic();
+    document.getElementById(`bgMusic${currentTrack}`).volume = 0.5;
+    document.getElementById(`bgMusic${currentTrack}`).play();
+    musicModal.classList.add('hidden');
+    musicControl.classList.add('playing');
+  }
+  function stopAllMusic() { music1.pause(); music2.pause(); }
+  function toggleMusic() {
+    const currentMusic = document.getElementById(`bgMusic${currentTrack}`);
+    if (currentMusic.paused) { stopAllMusic(); currentMusic.play(); musicControl.classList.add('playing'); } 
+    else { currentMusic.pause(); musicControl.classList.remove('playing'); }
+  }
+  
+  // ===== ЗВУК КЛИКА =====
+  const clickSound = document.getElementById('clickSound');
+  function playClick() { clickSound.currentTime = 0; clickSound.volume = 0.6; clickSound.play().catch(() => {}); }
+  document.addEventListener('click', function(e) {
+    if (e.target.matches('input[type="radio"], input[type="checkbox"], button, .submit-btn, .music-modal-btn, .music-control, .track-btn, .menu-btn, .back-btn')) playClick();
+  });
+  
+  // ===== АНИМАЦИЯ =====
+  const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); }); }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  
+  // ===== БЛОК ДЛЯ ИНОГОРОДНИХ =====
+  document.querySelectorAll('input[name="Город"]').forEach(radio => {
+    radio.addEventListener('change', function() {
+      const outOfTownBlock = document.getElementById('outOfTownBlock');
+      if (this.value === 'Иногородний') {
+        outOfTownBlock.style.display = 'block';
+      } else {
+        outOfTownBlock.style.display = 'none';
+      }
+    });
+  });
+  
+  // ===== ПЕРЕКЛЮЧЕНИЕ ЭКРАНОВ МЕНЮ (с сохранением позиции скролла) =====
+  let savedScrollPosition = 0;
+  
+  function showMenuScreen(screenName) {
+    savedScrollPosition = window.scrollY;
+    document.getElementById('main-content').style.display = 'none';
+    document.querySelectorAll('.menu-screen').forEach(s => s.classList.remove('active'));
+    document.getElementById(`screen-${screenName}`).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setTimeout(() => {
+      const fadeEl = document.querySelector(`#screen-${screenName} .fade-in`);
+      if (fadeEl) fadeEl.classList.add('visible');
+    }, 100);
+  }
+  
+  function hideMenuScreen() {
+    document.querySelectorAll('.menu-screen').forEach(s => s.classList.remove('active'));
+    document.getElementById('main-content').style.display = 'block';
+    setTimeout(() => {
+      window.scrollTo({ top: savedScrollPosition, behavior: 'smooth' });
+    }, 50);
+  }
+  
+  // ===== КОНФЕТТИ =====
+  function createConfetti() {
+    const colors = ['#e91e63', '#f8bbd0', '#ffd700', '#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#ffeaa7'];
+    const confettiCount = 100;
+    for (let i = 0; i < confettiCount; i++) {
+      const confetti = document.createElement('div');
+      confetti.style.position = 'fixed';
+      confetti.style.width = Math.random() * 10 + 5 + 'px';
+      confetti.style.height = Math.random() * 10 + 5 + 'px';
+      confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+      confetti.style.left = Math.random() * 100 + 'vw';
+      confetti.style.top = '-10px';
+      confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+      confetti.style.zIndex = '3000';
+      confetti.style.pointerEvents = 'none';
+      confetti.style.animation = `confetti-fall ${Math.random() * 3 + 2}s linear forwards`;
+      confetti.style.animationDelay = Math.random() * 2 + 's';
+      document.body.appendChild(confetti);
+      setTimeout(() => confetti.remove(), 5000);
+    }
+  }
+  
+  // ===== ОТПРАВКА ФОРМЫ =====
+  document.getElementById('guest-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    fetch(this.action, { method: 'POST', body: new FormData(this), headers: { 'Accept': 'application/json' } })
+    .then(response => {
+      if (response.ok) {
+        document.getElementById('screen-form').classList.remove('active');
+        document.getElementById('thanksScreen').classList.add('active');
+        createConfetti();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        this.reset();
+      } else { alert('Что-то пошло не так. Попробуй ещё раз!'); }
+    }).catch(() => alert('Ошибка отправки. Проверь интернет.'));
+  });
+</script>
+
+</body>
+</html>
